@@ -7,6 +7,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * @author scphy 2024/1/24
@@ -85,6 +87,18 @@ public class ObjectUtils {
             return null;
         }
         return Arrays.stream(element).filter(ObjectUtils::isNotEmpty).max(Comparable::compareTo).orElse(null);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getFirstMatching(Function<T, Boolean> condition, Supplier<T>... suppliers) {
+        T t = null;
+        for (Supplier<T> supplier : suppliers) {
+            t = supplier.get();
+            if (condition.apply(t)) {
+                break;
+            }
+        }
+        return t;
     }
 
 }
