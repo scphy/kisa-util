@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -89,8 +90,7 @@ public class ObjectUtils {
         return Arrays.stream(element).filter(ObjectUtils::isNotEmpty).max(Comparable::compareTo).orElse(null);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> T getFirstMatching(Function<T, Boolean> condition, Supplier<T>... suppliers) {
+    public static <T> T getFirstMatching(List<Supplier<T>> suppliers, Function<T, Boolean> condition) {
         T t = null;
         for (Supplier<T> supplier : suppliers) {
             t = supplier.get();
