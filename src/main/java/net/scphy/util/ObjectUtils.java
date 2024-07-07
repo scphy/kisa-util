@@ -90,7 +90,7 @@ public class ObjectUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public <T> T getFirstMatching(Function<T, Boolean> condition, Supplier<T>... suppliers) {
+    public static <T> T getFirstMatching(Function<T, Boolean> condition, Supplier<T>... suppliers) {
         T t = null;
         for (Supplier<T> supplier : suppliers) {
             t = supplier.get();
